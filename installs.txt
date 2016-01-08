@@ -1,0 +1,7 @@
+flask
+flask-bcrypt
+flask-restful
+flask-sqlalchemy
+sqlalchemy-utils
+#boto
+

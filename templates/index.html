@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block body %}
+<style>
+	body {
+		font-family: Verdana;
+	}
+	#list
+	{
+	font-family: Verdana;
+	font-size: 10px;
+	margin-left: 10px;
+	padding: 0 10px;
+	margin: 1em 0;
+	border: 1px solid #999;
+	}
+	}
+	</style>
+<script type="text/javascript" src="{{ url_for('static', filename='sjcl.js') }}"></script>
+<form action="javascript: handleFileSelect();" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="key" value="{{ user_file.s3_object }}" />
+    <input type="hidden" name="success_action_redirect" value="{{ user_file.url() }}" />
+    <input type="hidden" name="AWSAccessKeyId" value="{{ access_key }}" />
+    <input type="hidden" name="Policy" value="{{ user_file.base64_policy() }}" />
+    <input type="hidden" name="Signature" value="{{ signed_policy }}" />
+    File: <input id="file" type="file" name="fileselect[]" multiple="multiple" /> 
+	Please enter the key: <input type="text" id ="userkey" value="123"/>
+    <div id="drop_zone">Drop files here</div>
+    <!-- The elements after this will be ignored -->
+    <div id="list">
+        <p>Status Messages</p>
+    </div>
+	<div id="progressNumber"></div>
+    <input type="submit" name="submit" value="Upload to Amazon S3" />
+    
+</form>
+<script type="text/javascript" src="{{ url_for('static', filename='file.js') }}"></script>  
+
+{% endblock %}
+
